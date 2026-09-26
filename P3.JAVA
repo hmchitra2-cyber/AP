@@ -1,0 +1,82 @@
+MAINXML.JAVA
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F40404"
+    tools:context=".MainActivity">
+
+    <AutoCompleteTextView
+        android:id="@+id/actvUi"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:background="#FFFFFF"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="center"
+        android:hint="Enter the course"
+        android:padding="8dp"
+        android:textColor="#090000"
+        android:textColorHint="#575252"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.85"
+        app:layout_constraintVertical_bias="0.062" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+MAINACTIVITY.JAVA
+
+package com.darshan.program3lab;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    AutoCompleteTextView actv;
+
+    String[] courses = {
+            "BCA",
+            "BBA",
+            "B.Com",
+            "B.Sc",
+            "BA",
+            "MCA",
+            "MBA",
+            "M.Com",
+            "M.Sc"
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        actv = findViewById(R.id.actvUi);
+
+        // Adapter connects the course data to AutoCompleteTextView
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                courses
+        );
+
+        // Suggestions appear after typing 1 character
+        actv.setThreshold(1);
+
+        // Attach adapter to AutoCompleteTextView
+        actv.setAdapter(adapter);
+    }
+}
